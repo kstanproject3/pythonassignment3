@@ -2,6 +2,7 @@ import os
 import datetime
 from flask import Flask, flash, request, redirect, render_template, session, url_for
 from flask_bcrypt import Bcrypt
+from bson.objectid import ObjectId
 from utils.utils import num_there, special_there, Liste
 from bson.json_util import dumps
 from flask_cors import CORS
@@ -96,6 +97,19 @@ def get_collection():
             return dumps({'error': str(e)})
     else:
         return render_template('login.html')
+
+
+@app.route('/article/<_id>')
+def my_view_func(_id):
+    x = collection.find_one({'_id': ObjectId(_id)})
+    return render_template('article.html', data=x)
+
+
+@app.route('/logout')
+def logout():
+    # remove the username from the session if it's there
+    session.pop('username', None)
+    return render_template('login.html')
 
 
 if __name__ == '__main__':
