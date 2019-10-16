@@ -5,7 +5,7 @@ from flask_bcrypt import Bcrypt
 from utils.utils import num_there, special_there
 from bson.json_util import dumps
 from flask_cors import CORS
-from config.db import users
+from config.db import users, collection
 
 app = Flask(__name__, template_folder='./public')
 CORS(app)
@@ -82,6 +82,19 @@ def register():
         else:
             flash("Password should contains at least one number and one special character !")
             return redirect('/login')
+
+
+@app.route('/', methods=['GET'])
+def get_collection():
+    if 'username' in session:
+        try:
+            x = list(collection.find())
+            return render_template('index.html', data=x)
+        except ValueError as e:
+            return dumps({'error': str(e)})
+    else:
+        return render_template('login.html')
+
 
 if __name__ == '__main__':
     app.run()
