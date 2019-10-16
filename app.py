@@ -2,7 +2,7 @@ import os
 import datetime
 from flask import Flask, flash, request, redirect, render_template, session, url_for
 from flask_bcrypt import Bcrypt
-from utils.utils import num_there, special_there
+from utils.utils import num_there, special_there, Liste
 from bson.json_util import dumps
 from flask_cors import CORS
 from config.db import users, collection
@@ -88,7 +88,9 @@ def register():
 def get_collection():
     if 'username' in session:
         try:
-            x = list(collection.find())
+            x = list(collection.find().limit(9))
+            for i in range(len(x)):
+                x[i].update({"image": Liste[i]})
             return render_template('index.html', data=x)
         except ValueError as e:
             return dumps({'error': str(e)})
