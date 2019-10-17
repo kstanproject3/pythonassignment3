@@ -91,6 +91,7 @@ a {
   font-weight: 500;
   border-radius: 3px;
   border: none !important;
+  margin-right:5px;
 }
 
 .btn:hover {
@@ -359,10 +360,10 @@ footer .app-footer p {
 
 .contentArticle .btns {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-  height: 70%;
+    flex: 1;
+    height: 70%;
+    align-items: flex-start;
+    justify-content: flex-end;
 }
 
 .contentArticle .btns .btn {
@@ -424,6 +425,9 @@ footer .app-footer p {
           <div class="btns">
             <a class="btn bg-primary black-color" href="/edit/{{ data._id }}">
               <i class="ion-edit"></i>
+            </a>
+            <a class="btn bg-primary black-color" href="/delete/{{ data._id }}">
+              <i class="ion-ios-trash"></i>
             </a>
             <a id="btn-top" class="btn bg-primary black-color" href="#header">
               <i class="ion-arrow-up-c"></i>

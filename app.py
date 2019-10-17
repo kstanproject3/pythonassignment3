@@ -150,7 +150,7 @@ def add():
         return render_template('login.html')
 
 
-@app.route('/edit/<_id>', methods=['POST'])
+@app.route('/edit/<_id>', methods=['PUT'])
 def edit(_id):
     if 'username' in session:
         try:
@@ -166,6 +166,18 @@ def edit(_id):
             }
             print(obj)
             collection.update_one({"_id": ObjectId(_id)}, {"$set": obj})
+            return redirect('/')
+        except ValueError as e:
+            return dumps({'error': str(e)})
+    else:
+        return render_template('login.html')
+
+
+@app.route('/delete/<_id>')
+def delete(_id):
+    if 'username' in session:
+        try:
+            collection.delete_one({"_id": ObjectId(_id)})
             return redirect('/')
         except ValueError as e:
             return dumps({'error': str(e)})
