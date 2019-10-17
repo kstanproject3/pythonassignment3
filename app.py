@@ -108,6 +108,15 @@ def my_view_func(_id):
         return render_template('login.html')
 
 
+@app.route('/edit/<_id>')
+def edit_get(_id):
+    if 'username' in session:
+        x = collection.find_one({'_id': ObjectId(_id)})
+        return render_template('edit.html', data=x)
+    else:
+        return render_template('login.html')
+
+
 @app.route('/add', methods=['GET'])
 def add_get():
     if 'username' in session:
@@ -134,6 +143,29 @@ def add():
                 "reading_time": reading_time
             }
             collection.insert_one(obj)
+            return redirect('/')
+        except ValueError as e:
+            return dumps({'error': str(e)})
+    else:
+        return render_template('login.html')
+
+
+@app.route('/edit/<_id>', methods=['POST'])
+def edit(_id):
+    if 'username' in session:
+        try:
+            title = request.form['title']
+            text = request.form['text']
+            link = request.form['link']
+            reading_time = request.form['reading_time']
+            obj = {
+                "title": title,
+                "link": link,
+                "text": text,
+                "reading_time": reading_time
+            }
+            print(obj)
+            collection.update_one({"_id": ObjectId(_id)}, {"$set": obj})
             return redirect('/')
         except ValueError as e:
             return dumps({'error': str(e)})
