@@ -101,8 +101,53 @@ def get_collection():
 
 @app.route('/article/<_id>')
 def my_view_func(_id):
-    x = collection.find_one({'_id': ObjectId(_id)})
-    return render_template('article.html', data=x)
+    if 'username' in session:
+        x = collection.find_one({'_id': ObjectId(_id)})
+        return render_template('article.html', data=x)
+    else:
+        return render_template('login.html')
+
+
+@app.route('/add', methods=['GET'])
+def add_get():
+    if 'username' in session:
+        try:
+            return render_template('new.html')
+        except ValueError as e:
+            return dumps({'error': str(e)})
+    else:
+        return render_template('login.html')
+
+
+@app.route('/add', methods=['POST'])
+def add():
+    try:
+        title = request.form['title']
+        text = request.form['text']
+        link = request.form['link']
+        reading_time = request.form['reading_time']
+        obj = {
+            "title": title,
+            "link": link,
+            "text": text,
+            "reading_time": reading_time
+        }
+        collection.insert_one(obj)
+        return redirect('/')
+    except ValueError as e:
+        return dumps({'error': str(e)})
+
+
+@app.route('/search', methods=['POST'])
+def search_get():
+    try:
+        search = request.form['search']
+        x = list(collection.find({ "title": { "$regex": ".*" + search + ".*"} }).limit(9))
+        for i in range(len(x)):
+            x[i].update({"image": Liste[i]})
+        return render_template('index.html', data=x)
+    except ValueError as e:
+        return dumps({'error': str(e)})
 
 
 @app.route('/logout')
