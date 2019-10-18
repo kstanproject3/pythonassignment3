@@ -90,8 +90,6 @@ def get_collection():
     if 'username' in session:
         try:
             x = list(collection.find().limit(9))
-            for i in range(len(x)):
-                x[i].update({"image": Liste[i]})
             return render_template('index.html', data=x)
         except ValueError as e:
             return dumps({'error': str(e)})
