@@ -133,12 +133,10 @@ def add():
             title = request.form['title']
             text = request.form['text']
             link = request.form['link']
-            reading_time = request.form['reading_time']
             obj = {
                 "title": title,
                 "link": link,
-                "text": text,
-                "reading_time": reading_time
+                "text": text
             }
             collection.insert_one(obj)
             return redirect('/')
@@ -155,12 +153,10 @@ def edit(_id):
             title = request.form['title']
             text = request.form['text']
             link = request.form['link']
-            reading_time = request.form['reading_time']
             obj = {
                 "title": title,
                 "link": link,
-                "text": text,
-                "reading_time": reading_time
+                "text": text
             }
             collection.update_one({"_id": ObjectId(_id)}, {"$set": obj})
             return redirect('/')
