@@ -29,6 +29,9 @@ body {
   font-family: "Rubik", sans-serif;
   font-weight: 300;
   scroll-behavior: smooth;
+  background-image: url(https://thumbor.sd-cdn.fr/0jLYHu8pvQrdoMb-9eVeFFHdOt0=/770x515/cdn.sd-cdn.fr/wp-content/uploads/2016/10/blockchain_converted.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 a {
@@ -69,8 +72,8 @@ a {
   color: #dfe2db;
 }
 
-.black-color {
-  color: #191919;
+.yellow-color {
+  color: #fff056;
 }
 
 .white-color {
@@ -118,6 +121,7 @@ select {
 
 header {
   width: 100%;
+  height: 30px;
   padding: 24px 0;
   -webkit-box-shadow: 0px 4px 11px -4px rgba(0, 0, 0, 0.29);
   -moz-box-shadow: 0px 4px 11px -4px rgba(0, 0, 0, 0.29);
@@ -129,17 +133,28 @@ header .app-header,
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-align: center;
+}
+
+.white-color {
+  font-weight: 300;
+  text-align: center;
 }
 
 /* Style Footer */
 
 footer {
   width: 100%;
+  height: 20px;
   padding: 30px 0;
 }
 
 footer .app-footer p {
   font-weight: 300;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  margin-top: auto;
 }
 
 /* Style body - Home */
@@ -393,12 +408,16 @@ footer .app-footer p {
 
   <body>
     <div class="blog">
-      <header class="bg-black"></header>
+      <header class=" bg-black">
+        <div class="container header">
+          <p class="white-color"> BlockChain @ PythonAssignment3</p>
+        </div>
+      </header>
 
       <section id="bodyCards" class="container">
         <div class="content">
           <form method="POST" action="/login" class="formLogin">
-            <h3 class="black-color">Welcome to Dashboard!</h3>
+            <h3 class="yellow-color">Welcome to Dashboard!</h3>
             <input type="username" name="username" placeholder="Username" />
             <input type="password" name="password" placeholder="Password" />
             <input
