@@ -89,7 +89,7 @@ def register():
 def get_collection():
     if 'username' in session:
         try:
-            x = list(collection.find().limit(9))
+            x = list(collection.find().sort("number", -1).limit(12))
             return render_template('index.html', data=x)
         except ValueError as e:
             return dumps({'error': str(e)})
@@ -133,10 +133,12 @@ def add():
             title = request.form['title']
             text = request.form['text']
             link = request.form['link']
+            x = list(collection.find())
             obj = {
                 "title": title,
                 "link": link,
-                "text": text
+                "text": text,
+                "number": len(x) + 1
             }
             collection.insert_one(obj)
             return redirect('/')
