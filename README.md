@@ -10,6 +10,7 @@ python3 app.py
 
 # pythonassignment3
 https:// https://pythonassignment3.herokuapp.com/
+
 Pythonassignment3 is a blockchain information Hub to allow our company to learn and 
 share the effect mechanism allowing programmable transactions It related or able to integrate to AI & IOT , etc. Ethereum network, for example, part of blockchain language, used to write such scripts is aTuring complete blockchain transaction.  This Blockchain Hub consist news sharing not only on Blockchain and also IOT, AI, and how python in AI, etc. 
 
